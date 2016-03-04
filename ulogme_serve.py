@@ -21,6 +21,12 @@ os.chdir('render')
 # Custom handler
 class CustomHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
   def do_GET(self):
+    ip = self.client_address[0]
+    if not ip in listOfIP:
+      # only IP address in the list are allowed to view data
+      # it protects the privacy
+      print ip + ' is trying to view our data but is blocked'
+      return
     # default behavior
     SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self) 
 
@@ -66,6 +72,13 @@ class CustomHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     self.send_header('Content-type','text/html')
     self.end_headers()
     self.wfile.write(result)
+
+f = open('../allowed_ip.txt', 'r')
+listOfIP = [i.strip('\n') for i in f.readlines()]
+f.close()
+
+for i in listOfIP:
+  print i
 
 httpd = SocketServer.ThreadingTCPServer((IP, PORT), CustomHandler)
 
