@@ -77,9 +77,6 @@ f = open('../allowed_ip.txt', 'r')
 listOfIP = [i.strip('\n') for i in f.readlines()]
 f.close()
 
-for i in listOfIP:
-  print i
-
 httpd = SocketServer.ThreadingTCPServer((IP, PORT), CustomHandler)
 
 print 'Serving ulogme, see it on http://localhost:' + `PORT`
