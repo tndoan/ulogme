@@ -24,7 +24,7 @@ do
 		# Assume XFCE folks use xscreensaver (the default).
 		screensaverstate=$(xscreensaver-command -time | cut -f2 -d: | cut -f2-3 -d' ')
 		if [[ $screensaverstate =~ "screen non-blanked" ]]; then islocked=false; fi
-	elif [[ $GDMSESSION == 'ubuntu' || $GDMSESSION == 'ubuntu-2d' || $GDMSESSION == 'gnome-shell' || $GDMSESSION == 'gnome-classic' || $GDMSESSION == 'gnome-fallback' || $GDMSESSION == 'cinnamon' ]]; then
+	elif [[ $GDMSESSION == 'ubuntu' || $GDMSESSION == 'ubuntu-2d' || $GDMSESSION == 'gnome-shell' || $GDMSESSION == 'gnome-classic' || $GDMSESSION == 'gnome-fallback' || $GDMSESSION == 'cinnamon' || $GDMSESSION == 'gnome-flashback-metacity' ]]; then
 		# Assume the GNOME/Ubuntu/cinnamon folks are using gnome-screensaver.
 		screensaverstate=$(gnome-screensaver-command -q 2>&1 /dev/null)
 		if [[ $screensaverstate =~ .*inactive.* ]]; then islocked=false; fi
